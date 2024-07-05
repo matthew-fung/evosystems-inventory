@@ -62,5 +62,133 @@
         "price": 60
       }
     }
+  },
+  {
+    "name": "scarlet",
+    "status": "sold",
+    "cost": 335.0,
+    "soldPrice": 475.0,
+    "listDate": "July 2, 2024",
+    "soldDate": "July 6, 2024",
+    "parts": {
+      "cpu": {
+        "brand": "intel",
+        "model": "i7-6700K",
+        "price": 100.0
+      },
+      "motherboard": {
+        "brand": "Asus",
+        "model": "TUF Z270",
+        "price": 100.0
+      },
+      "ram": [
+        {
+          "format": "DDR4",
+          "brand": "Corsair",
+          "memory": 8,
+          "count": 2
+        }
+      ],
+      "gpu": {
+        "brand": "Zotac",
+        "model": "GTX 1080",
+        "memory": 8,
+        "price": 100.0
+      },
+      "storage": [
+        {
+          "type": "SSD",
+          "brand": "Corsair",
+          "memory": 256,
+          "count": 1
+        },
+        {
+          "type": "HDD",
+          "brand": "Toshiba",
+          "memory": 500,
+          "count": 1
+        }
+      ],
+      "psu": {
+        "brand": "Azza",
+        "wattage": 650,
+        "price": 45
+      },
+      "network": {
+        "brand": "Archer",
+        "model": "T2UB Nano",
+        "price": 13.45
+      },
+      "case": {
+        "brand": "Fractal",
+        "model": "Meshify C",
+        "size": "ATX",
+        "price": 60
+      }
+    }
+  },
+  {
+    "name": "scarlet",
+    "status": "sold",
+    "cost": 335.0,
+    "soldPrice": 475.0,
+    "listDate": "July 2, 2024",
+    "soldDate": "July 6, 2024",
+    "parts": {
+      "cpu": {
+        "brand": "intel",
+        "model": "i7-6700K",
+        "price": 100.0
+      },
+      "motherboard": {
+        "brand": "Asus",
+        "model": "TUF Z270",
+        "price": 100.0
+      },
+      "ram": [
+        {
+          "format": "DDR4",
+          "brand": "Corsair",
+          "memory": 8,
+          "count": 2
+        }
+      ],
+      "gpu": {
+        "brand": "Zotac",
+        "model": "GTX 1080",
+        "memory": 8,
+        "price": 100.0
+      },
+      "storage": [
+        {
+          "type": "SSD",
+          "brand": "Corsair",
+          "memory": 256,
+          "count": 1
+        },
+        {
+          "type": "HDD",
+          "brand": "Toshiba",
+          "memory": 500,
+          "count": 1
+        }
+      ],
+      "psu": {
+        "brand": "Azza",
+        "wattage": 650,
+        "price": 45
+      },
+      "network": {
+        "brand": "Archer",
+        "model": "T2UB Nano",
+        "price": 13.45
+      },
+      "case": {
+        "brand": "Fractal",
+        "model": "Meshify C",
+        "size": "ATX",
+        "price": 60
+      }
+    }
   }
 ]
