@@ -1,4 +1,8 @@
 import React from 'react'
+
+import { BuildProps } from '@/types'
+import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
 import {
   Card,
   CardContent,
@@ -7,9 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from '../ui/card'
-import { BuildProps } from '@/types'
-import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
 
 function BuildListing({ build }: { build: BuildProps }) {
   const { name, status, cost, soldPrice, listDate, soldDate } = build
