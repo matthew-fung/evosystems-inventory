@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom'
 const pageHeaders = {
   '/list': 'Build List',
   '/new': 'New Build',
+  '/buy': 'New Purchase',
   '/inventory': 'Inventory',
   '/stats': `Statistics`,
 }
