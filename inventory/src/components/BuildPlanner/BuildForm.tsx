@@ -39,7 +39,7 @@ export function BuildForm() {
   }
 
   {
-    /* CPu */
+    /* CPU */
   }
   {
     /* motherboard */

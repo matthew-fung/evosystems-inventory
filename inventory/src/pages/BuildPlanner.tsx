@@ -7,9 +7,6 @@ import React from 'react'
 function BuildPlanner() {
   return (
     <div>
-      <div className="text-center h-8">
-        <h1>New Build</h1>
-      </div>
       <BuildForm />
 
       <RunningTotal />
