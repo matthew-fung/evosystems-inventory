@@ -54,7 +54,6 @@ export function BuyForm() {
       brand: '',
       model: '',
       capacity: 0,
-      price: 0,
     },
   })
 
@@ -81,7 +80,11 @@ export function BuyForm() {
                 </FormControl>
                 <SelectContent>
                   {itemTypes.map(itemType => (
-                    <SelectItem key={itemType} value={itemType}>
+                    <SelectItem
+                      className="text-base"
+                      key={itemType}
+                      value={itemType}
+                    >
                       {itemType}
                     </SelectItem>
                   ))}
@@ -92,52 +95,62 @@ export function BuyForm() {
           )}
         />
         <FormField
-          name="brand" // Add the name property
+          name="brand"
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Item Brand</FormLabel>
               <FormControl>
-                <Input placeholder="Brand" {...field} />
+                <Input className="text-base" placeholder="Brand" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <FormField
-          name="model" // Add the name property
+          name="model"
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Item model</FormLabel>
               <FormControl>
-                <Input placeholder="Item model" {...field} />
+                <Input className="text-base" placeholder="Model" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <FormField
-          name="capacity" // Add the name property
+          name="capacity"
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Capacity</FormLabel>
               <FormControl>
-                <Input placeholder="Capacity in GB" {...field} />
+                <Input
+                  className="text-base"
+                  placeholder="Capacity in GB"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <FormField
-          name="price" // Add the name property
+          name="price"
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Item price</FormLabel>
               <FormControl>
-                <Input placeholder="Item price" {...field} />
+                <Input
+                  className="text-base"
+                  placeholder="Item price"
+                  {...field}
+                  type="number"
+                  pattern="[0-9]*"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

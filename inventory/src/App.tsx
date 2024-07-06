@@ -13,7 +13,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/list" Component={BuildList} />
-          <Route path="/new" Component={BuildPlanner} />
+          <Route path="/build" Component={BuildPlanner} />
           <Route path="/inventory" Component={Inventory} />
           <Route path="/buy" Component={Buy} />
         </Routes>
