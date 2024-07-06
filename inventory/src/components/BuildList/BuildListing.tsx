@@ -15,7 +15,7 @@ import {
 function BuildListing({ build }: { build: BuildProps }) {
   const { id, name, status, cost, soldPrice, listDate, soldDate } = build
   return (
-    <Card>
+    <Card key={id}>
       <CardHeader>
         <CardTitle className="flex justify-between">
           {name}

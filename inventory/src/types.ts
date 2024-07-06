@@ -1,4 +1,5 @@
 export interface BuildProps {
+  id: number
   name: string
   status: string
   cost: number

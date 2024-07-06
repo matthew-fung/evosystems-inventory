@@ -1,10 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
-import { Form, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Button } from '../ui/button'
 import { Input } from '@/components/ui/input'
 import {
+  Form,
   FormField,
   FormItem,
   FormLabel,
@@ -63,13 +64,10 @@ export function BuildForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>PC name</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="New PC" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -77,6 +75,5 @@ export function BuildForm() {
         <Button type="submit">Submit</Button>
       </form>
     </Form>
-    // <h1>haahah</h1>
   )
 }
