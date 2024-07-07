@@ -6,10 +6,12 @@ import Menu from './components/Navigation/Menu'
 import Inventory from './pages/Inventory'
 import Header from './components/Navigation/Header'
 import Buy from './pages/Buy'
+import { Toaster } from './components/ui/toaster'
 function App() {
   return (
     <Router>
       <div>
+        <Toaster />
         <Header />
         <Routes>
           <Route path="/list" Component={BuildList} />

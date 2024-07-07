@@ -19,6 +19,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { ToastAction } from '@/components/ui/toast'
+import { useToast } from '@/components/ui/use-toast'
 
 const formSchema = z.object({
   type: z.string(),
@@ -55,6 +57,7 @@ const formFieldsMap = {
 }
 
 export function BuyForm() {
+  const { toast } = useToast()
   const [selectedType, setSelectedType] = useState(itemTypes[0])
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -76,6 +79,10 @@ export function BuyForm() {
 
     // TODO: Save the form values to DB
     console.log(values)
+
+    toast({
+      title: 'Purchase saved',
+    })
 
     // Reset form after submission
     form.reset({
