@@ -77,8 +77,6 @@ export function BuyForm() {
       delete values.capacity
     }
 
-    // TODO: Save the form values to DB
-    console.log(values)
     await Parts.add(values)
 
     toast({

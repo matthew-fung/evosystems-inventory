@@ -27,13 +27,11 @@ class Parts {
     return result.data
   }
 
-  // Add other static methods as needed
-  // Example:
-  // static async get(partId: string): Promise<any> {
-  //   const getPartFunction = httpsCallable(functions, 'getPart')
-  //   const result = await getPartFunction({ partId })
-  //   return result.data
-  // }
+  static async get(): Promise<any> {
+    const getPartsFunction = httpsCallable(functions, 'getParts')
+    const result = await getPartsFunction()
+    return result.data
+  }
 }
 
 export default Parts
