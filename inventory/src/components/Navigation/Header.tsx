@@ -13,8 +13,8 @@ const pageHeaders = {
 
 function Header() {
   const location = useLocation()
-  console.log(location.pathname)
   const pageHeader = pageHeaders[location.pathname]
+
   return (
     <div className="text-center py-8">
       <h1 className="font-semibold">{pageHeader}</h1>

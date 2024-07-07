@@ -32,7 +32,6 @@ export function BuildForm() {
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     //   TODO: Save the form values to DB
-    console.log(values)
   }
   {
     /* name */

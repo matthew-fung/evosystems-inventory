@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '../ui/input'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Button } from '../ui/button'
@@ -11,7 +11,6 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-  FormDescription,
 } from '../ui/form'
 import {
   Select,
@@ -24,12 +23,12 @@ import {
 const formSchema = z.object({
   type: z.string(),
   brand: z.string().min(2, {
-    message: 'name must be at least 2 characters.',
+    message: 'Brand must be at least 2 characters.',
   }),
   model: z.string().min(2, {
-    message: 'name must be at least 2 characters.',
+    message: 'Model must be at least 2 characters.',
   }),
-  capacity: z.number().int().positive(),
+  capacity: z.number().optional(),
   price: z.number().int().positive(),
 })
 
@@ -44,8 +43,19 @@ const itemTypes = [
   'Case',
 ]
 
+const formFieldsMap = {
+  CPU: ['brand', 'model', 'price'],
+  Motherboard: ['brand', 'model', 'price'],
+  RAM: ['brand', 'model', 'capacity', 'price'],
+  GPU: ['brand', 'model', 'price'],
+  Storage: ['brand', 'model', 'capacity', 'price'],
+  PSU: ['brand', 'model', 'price'],
+  Network: ['brand', 'model'],
+  Case: ['brand', 'model', 'price'],
+}
+
 export function BuyForm() {
-  // 1. Define your form.
+  const [selectedType, setSelectedType] = useState(itemTypes[0])
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
 
@@ -54,13 +64,144 @@ export function BuyForm() {
       brand: '',
       model: '',
       capacity: 0,
+      price: 0,
     },
   })
 
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    //   TODO: Save the form values to DB
+    // Remove 'capacity' from values if not present in formFieldsMap
+    if (!formFieldsMap[selectedType].includes('capacity')) {
+      delete values.capacity
+    }
+
+    // TODO: Save the form values to DB
     console.log(values)
+
+    // Reset form after submission
+    form.reset({
+      type: selectedType,
+      brand: '',
+      model: '',
+      capacity: 0,
+      price: 0,
+    })
+  }
+
+  const handleTypeChange = value => {
+    setSelectedType(value)
+    form.reset({
+      type: value,
+      brand: '',
+      model: '',
+      capacity: 0,
+      price: 0,
+    })
+  }
+
+  const renderFormField = name => {
+    switch (name) {
+      case 'brand':
+        return (
+          <FormField
+            key={name}
+            name={name}
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Brand</FormLabel>
+                <FormControl>
+                  <Input
+                    className="text-base"
+                    placeholder="Item Brand"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )
+      case 'model':
+        return (
+          <FormField
+            key={name}
+            name={name}
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Model</FormLabel>
+                <FormControl>
+                  <Input
+                    className="text-base"
+                    placeholder="Item Model"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )
+      case 'capacity':
+        return (
+          <FormField
+            key={name}
+            name={name}
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Capacity (GB)</FormLabel>
+                <FormControl>
+                  <Input
+                    className="text-base"
+                    placeholder="Capacity in GB"
+                    {...field}
+                    onChange={e =>
+                      field.onChange(
+                        e.target.value ? parseInt(e.target.value, 10) : ''
+                      )
+                    }
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )
+      case 'price':
+        return (
+          <FormField
+            key={name}
+            name={name}
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Price</FormLabel>
+                <FormControl>
+                  <Input
+                    className="text-base"
+                    placeholder="Item Price"
+                    {...field}
+                    type="number"
+                    pattern="[0-9]*"
+                    onChange={e =>
+                      field.onChange(
+                        e.target.value ? parseInt(e.target.value, 10) : ''
+                      )
+                    }
+                    onFocus={() => {
+                      field.onChange('')
+                    }}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )
+      default:
+        return null
+    }
   }
 
   return (
@@ -72,7 +213,13 @@ export function BuyForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Item type</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={value => {
+                  handleTypeChange(value)
+                  field.onChange(value)
+                }}
+                defaultValue={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select the type of item purchased" />
@@ -94,70 +241,11 @@ export function BuyForm() {
             </FormItem>
           )}
         />
-        <FormField
-          name="brand"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Item Brand</FormLabel>
-              <FormControl>
-                <Input className="text-base" placeholder="Brand" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          name="model"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Item model</FormLabel>
-              <FormControl>
-                <Input className="text-base" placeholder="Model" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          name="capacity"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Capacity</FormLabel>
-              <FormControl>
-                <Input
-                  className="text-base"
-                  placeholder="Capacity in GB"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          name="price"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Item price</FormLabel>
-              <FormControl>
-                <Input
-                  className="text-base"
-                  placeholder="Item price"
-                  {...field}
-                  type="number"
-                  pattern="[0-9]*"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {formFieldsMap[selectedType].map(renderFormField)}
 
-        <Button type="submit">Submit</Button>
+        <Button className="w-full" type="submit">
+          Submit
+        </Button>
       </form>
     </Form>
   )
