@@ -11,10 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: inventory
+      - run: npm install
+        working-directory: inventory
       - run: npm run build
+        working-directory: inventory
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_EVOSYSTEMS_INVENTORY }}
           channelId: live
           projectId: evosystems-inventory
+          working-directory: inventory
