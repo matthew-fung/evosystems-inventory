@@ -11,7 +11,7 @@ const firebaseConfig = {
 }
 
 const app = initializeApp(firebaseConfig)
-const functions = getFunctions(app, 'us-central1')
+const functions = getFunctions(app)
 
 // Connect to the local emulator if we are running in a local environment
 if (import.meta.env.MODE === 'development') {

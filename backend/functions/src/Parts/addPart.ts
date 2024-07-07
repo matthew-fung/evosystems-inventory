@@ -1,9 +1,9 @@
-import { error, log } from "firebase-functions/logger";
-import { onCall } from "firebase-functions/v2/https";
-import { db } from "../common/db";
+import {error, log} from "firebase-functions/logger";
+import {onCall} from "firebase-functions/v2/https";
+import {db} from "../common/db";
 
-export const addPart = onCall({ cors: true }, async (request) => {
-  const { type, brand, model, price, inUse } = request.data;
+export const addPart = onCall({cors: true}, async (request) => {
+  const {type, brand, model, price, inUse} = request.data;
 
   // Validate request body
   if (

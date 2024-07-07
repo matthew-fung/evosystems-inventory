@@ -1,3 +1,3 @@
-import { addPart, getParts } from "./Parts";
+import {addPart, getParts} from "./Parts";
 
-export { addPart, getParts };
+export {addPart, getParts};

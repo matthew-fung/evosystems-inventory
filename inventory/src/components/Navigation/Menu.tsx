@@ -1,9 +1,7 @@
 import {
-  faChartColumn,
   faCirclePlus,
   faMoneyBill,
   faScrewdriverWrench,
-  faWarehouse,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
@@ -34,7 +32,7 @@ function Menu() {
           <h2>Buy</h2>
         </div>
       </Link>
-      <Link to={`/inventory`}>
+      {/* <Link to={`/inventory`}>
         <div className="text-center py-4">
           <FontAwesomeIcon icon={faWarehouse} />
           <h2>Stock</h2>
@@ -45,7 +43,7 @@ function Menu() {
           <FontAwesomeIcon icon={faChartColumn} />
           <h2>Stats</h2>
         </div>
-      </Link>
+      </Link> */}
     </div>
   )
 }

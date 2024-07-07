@@ -1,12 +1,11 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import BuildList from './pages/List'
-import BuildPlanner from './pages/Build'
-import Menu from './components/Navigation/Menu'
-import Inventory from './pages/Inventory'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import Header from './components/Navigation/Header'
-import Buy from './pages/Buy'
+import Menu from './components/Navigation/Menu'
 import { Toaster } from './components/ui/toaster'
+import BuildPlanner from './pages/Build'
+import Buy from './pages/Buy'
+import BuildList from './pages/List'
 function App() {
   return (
     <Router>
@@ -16,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/list" Component={BuildList} />
           <Route path="/build" Component={BuildPlanner} />
-          <Route path="/inventory" Component={Inventory} />
+          {/* <Route path="/inventory" Component={Inventory} /> */}
           <Route path="/buy" Component={Buy} />
         </Routes>
         <Menu />
