@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-
+import { connectFunctionsEmulator, getFunctions } from 'firebase/functions'
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -11,5 +11,10 @@ const firebaseConfig = {
 }
 
 const app = initializeApp(firebaseConfig)
+const functions = getFunctions(app, 'us-central1')
 
-export { app }
+// Connect to the local emulator if we are running in a local environment
+if (import.meta.env.MODE === 'development') {
+  connectFunctionsEmulator(functions, 'localhost', 5001)
+}
+export { app, functions }

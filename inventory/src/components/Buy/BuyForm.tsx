@@ -1,17 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Input } from '../ui/input'
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { Button } from '../ui/button'
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from '../ui/form'
+import Parts from '@/api/Parts'
 import {
   Select,
   SelectContent,
@@ -20,6 +7,20 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useToast } from '@/components/ui/use-toast'
+import { zodResolver } from '@hookform/resolvers/zod'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { Button } from '../ui/button'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '../ui/form'
+import { Input } from '../ui/input'
 
 const formSchema = z.object({
   type: z.string(),
@@ -70,7 +71,7 @@ export function BuyForm() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Remove 'capacity' from values if not present in formFieldsMap
     if (!formFieldsMap[selectedType].includes('capacity')) {
       delete values.capacity
@@ -78,6 +79,7 @@ export function BuyForm() {
 
     // TODO: Save the form values to DB
     console.log(values)
+    await Parts.add(values)
 
     toast({
       title: 'Purchase saved',

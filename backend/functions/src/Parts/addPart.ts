@@ -1,13 +1,9 @@
-import * as functions from "firebase-functions";
+import { error, log } from "firebase-functions/logger";
+import { onCall } from "firebase-functions/v2/https";
 import { db } from "../common/db";
 
-export const addPart = functions.https.onRequest(async (request, response) => {
-  if (request.method !== "POST") {
-    response.status(405).send("Method Not Allowed");
-    return;
-  }
-
-  const { type, brand, model, price, inUse } = request.body;
+export const addPart = onCall({ cors: true }, async (request) => {
+  const { type, brand, model, price, inUse } = request.data;
 
   // Validate request body
   if (
@@ -17,7 +13,6 @@ export const addPart = functions.https.onRequest(async (request, response) => {
     typeof price !== "number" ||
     typeof inUse !== "boolean"
   ) {
-    response.status(400).send("Invalid request body");
     return;
   }
 
@@ -31,9 +26,8 @@ export const addPart = functions.https.onRequest(async (request, response) => {
     };
 
     const docRef = await db.collection("Parts").add(newPart);
-    response.status(201).send(`Part added with ID: ${docRef.id}`);
-  } catch (error) {
-    functions.logger.error("Error adding part", error);
-    response.status(500).send("Internal Server Error");
+    log("Part added with ID: ", docRef.id);
+  } catch (err) {
+    error("Error adding part", err);
   }
 });
