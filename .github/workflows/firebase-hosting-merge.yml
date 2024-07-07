@@ -14,13 +14,13 @@ jobs:
         with:
           path: inventory
       - run: npm install
-        working-directory: inventory
+        working-directory: ./inventory
       - run: npm run build
-        working-directory: inventory
+        working-directory: ./inventory
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_EVOSYSTEMS_INVENTORY }}
           channelId: live
           projectId: evosystems-inventory
-          working-directory: inventory
+          working-directory: ./inventory
