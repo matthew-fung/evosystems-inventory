@@ -19,7 +19,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { ToastAction } from '@/components/ui/toast'
 import { useToast } from '@/components/ui/use-toast'
 
 const formSchema = z.object({
@@ -51,7 +50,7 @@ const formFieldsMap = {
   RAM: ['brand', 'model', 'capacity', 'price'],
   GPU: ['brand', 'model', 'price'],
   Storage: ['brand', 'model', 'capacity', 'price'],
-  PSU: ['brand', 'model', 'price'],
+  PSU: ['brand', 'model', 'capacity', 'price'],
   Network: ['brand', 'model'],
   Case: ['brand', 'model', 'price'],
 }
@@ -157,11 +156,11 @@ export function BuyForm() {
             control={form.control}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Capacity (GB)</FormLabel>
+                <FormLabel>Capacity</FormLabel>
                 <FormControl>
                   <Input
                     className="text-base"
-                    placeholder="Capacity in GB"
+                    placeholder="Capacity"
                     {...field}
                     onChange={e =>
                       field.onChange(

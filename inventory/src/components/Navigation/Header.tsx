@@ -16,7 +16,7 @@ function Header() {
   const pageHeader = pageHeaders[location.pathname]
 
   return (
-    <div className="text-center py-8">
+    <div className="text-center py-4">
       <h1 className="font-semibold">{pageHeader}</h1>
     </div>
   )
